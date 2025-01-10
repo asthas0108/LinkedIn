@@ -24,5 +24,30 @@ GET http://localhost:9090/get_user_and_profile
 Content-Type: application/json
 
 {
-  "token": "0130123b3a0e446d09c52ed5ed429ac5cdfee8f4a9d25c5d4202792b52211db3"
+  "token": "a7186dfc0546da6cf09be7489b2347fd91720b65349dfbff03f0946030f7458b"
+}
+
+###
+
+POST http://localhost:9090/update_profile_data
+Content-Type: application/json
+
+{
+  "token": "9ca708658296426d8aed60f85a7f939f88d8458274ed09c2aefdbf83c1452605",
+  "bio": "hello i am astha1,  i am form delhi. iw ork in xyz company",
+  "currentPost": "CTO",
+  "pastWork": [
+    {
+      "company": "microsoft",
+      "position": "CTO",
+      "years": "2+"
+    }
+  ],
+  "education": [
+    {
+      "school": "iiit",
+      "degree": "btech",
+      "fieldOfStudy": "2023-27"
+    }
+  ]
 }
