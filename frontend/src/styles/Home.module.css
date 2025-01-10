@@ -1,0 +1,82 @@
+.container {
+    font-family: "Poppins";
+    padding: 1.2rem;
+}
+
+.mainContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    padding-inline: 2rem;
+    height: 80vh;
+}
+
+.mainContainer_left {
+    flex: 0.5;
+}
+
+.mainContainer_right {
+    flex: 0.5;
+}
+
+.mainContainer_left > p:nth-child(1) {
+    font-size: 2.9rem;
+    background: linear-gradient(45deg, #000000, #9d9d9d);
+    background-clip: text;
+    font-weight: bold;
+    -webkit-text-fill-color: transparent;
+    animation: animationHomePageBreathEffect 3s linear infinite;
+}
+
+@keyframes animationHomePageBreathEffect {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.mainContainer_left > p:nth-child(2) {
+    color: #4d4d4d;
+    font-size: 1.7rem;
+}
+
+.mainContainer_left > div.buttonJoin {
+    font-size: 1.4rem;
+    width: fit-content;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s;
+    margin-top: 0.8rem;
+    background-color: rgb(162, 75, 249);
+    color: white;
+    padding-inline: 1.2rem;
+    padding-block: 0.6rem;
+    border-radius: 20px;
+}
+
+@media only screen and (max-width: 600px){
+    .mainContainer{
+        flex-direction: column;
+        gap: 2rem;
+        padding-top: 1.32rem;
+    }
+
+    .mainContainer_left{
+        flex: 1px;
+        padding-top: 5.5rem;
+    }
+
+    .mainContainer_right{
+        flex: 1;
+    }
+
+    .mainContainer_right img{
+        width: 100%;
+    }
+}
