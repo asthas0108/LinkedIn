@@ -9,7 +9,7 @@ import styles from "./style.module.css";
 import { BASE_URL } from '@/config';
 import { resetPostId } from '@/config/redux/reducer/postReducer';
 
-export default function dashboard() {
+export default function Dashboard() {
 
     const router = useRouter();
     const dispatch = useDispatch();
