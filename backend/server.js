@@ -40,8 +40,14 @@ dotenv.config();
 
 const app = express();
 
+const corsOptions = {
+    origin: 'https://linked-71fpabes9-astha-singhs-projects-23c6e7e7.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.static("uploads"));
 
