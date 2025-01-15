@@ -41,7 +41,7 @@ dotenv.config();
 const app = express();
 
 const corsOptions = {
-    origin: 'https://linked-5duk1zpf2-astha-singhs-projects-23c6e7e7.vercel.app/',
+    origin: 'https://linked-5duk1zpf2-astha-singhs-projects-23c6e7e7.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
 };
