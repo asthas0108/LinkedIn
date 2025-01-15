@@ -9,7 +9,7 @@
 .backDropContainer {
     width: 100%;
     height: 30vh;
-    background: url("https://next-images.123rf.com/index/_next/image/?url=https://assets-cdn.123rf.com/index/static/assets/top-section-bg.jpeg&w=3840&q=75");
+    background-image: url("/images/banner.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
