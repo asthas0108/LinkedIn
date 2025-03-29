@@ -103,9 +103,11 @@ export default function ProfilePage() {
 
             <div className={styles.profileContainer_details}>
 
-              <div style={{display: "flex", gap: "0.7rem"}}>
+              <div style={{display: "flex", flexDirection: "column", gap: "1.7rem"}}>
 
-                <div style={{flex: "0.8"}}>
+                {/* bio */}
+
+                <div style={{}}>
 
                   <div style={{display: "flex", width: "fit-content", alignItems: "center", gap: "1.2rem"}}>
                     
@@ -117,59 +119,33 @@ export default function ProfilePage() {
                   </div>
 
                   <div>
-
-                    <textarea 
+                    <h3 style={{paddingBottom: "1.2rem"}}>About</h3>
+                    <textarea
+                      className={styles.textarea_about} 
                       value={userProfile.bio} 
-                      onChange={(e) => {
-                        setUserProfile({...userProfile, bio: e.target.value})
-                      }}
-
+                      onChange={(e) => setUserProfile({...userProfile, bio: e.target.value})}
                       rows={Math.max(3, Math.ceil(userProfile.bio.length / 80))}
-                      style={{width: "100%"}}
-                    
+                      style={{
+                        width: "100%",
+                        minHeight: "100px",
+                        padding: "10px",
+                        border: "1px solid #ccc",
+                        borderRadius: "5px",
+                        backgroundColor: "#f9f9f9",
+                        fontSize: "16px"
+                      }}
+                      placeholder="Write something about yourself..."
                     ></textarea>
-
                   </div>
 
-                </div>
-
-                <div style={{flex: "0.2"}}>
-
-                  <h3>Recent Activity</h3>
-
-                  {
-                    userPosts.map((post) => {
-                      // console.log(post);
-                      
-                      return (
-                        <div key={post._id} className={styles.postCard}>
-
-                          <div className={styles.card}>
-
-                            <div className={styles.card_profileContainer}>
-                              {
-                                post.media !== "" ? <img src={`${BASE_URL}/${post.media}`}/> : <div style={{width: "3.4rem", height:"3.4rem"}}></div>
-                              }
-                            </div>
-
-                            <p>{post.body}</p>
-
-                          </div>
-
-                        </div>
-                      )
-                    })
-                  }
 
                 </div>
 
-              </div>
+                {/* work history */}
 
-            </div>
+                <div className={styles.workHistory}>
 
-            <div className={styles.workHistory}>
-
-              <h4>WORK HISTORY</h4>
+              <h3>Work History</h3>
 
               <div className={styles.workHistoryContainer}>
 
@@ -194,7 +170,47 @@ export default function ProfilePage() {
 
               </div>
 
+                </div>
+
+                {/* recent activity */}
+
+                <div style={{}}>
+
+                  <h3>Recent Activity</h3>
+
+                  <div className={styles.cardContainer}>
+                  {
+                    userPosts.map((post) => {
+                      // console.log(post);
+                      
+                      return (
+                        <div key={post._id} className={styles.postCard}>
+
+                          <div className={styles.card}>
+
+                            <div className={styles.card_profileContainer}>
+                              {
+                                post.media !== "" ? <img src={`${BASE_URL}/${post.media}`}/> : <div style={{width: "3.4rem", height:"3.4rem"}}></div>
+                              }
+                            </div>
+
+                            <p>{post.body}</p>
+
+                          </div>
+
+                        </div>
+                      )
+                    })
+                  }
+                  </div>
+
+                </div>
+
+              </div>
+
             </div>
+
+            
 
             {
               userProfile != authState.user && 

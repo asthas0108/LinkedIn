@@ -93,7 +93,9 @@ export default function ViewProfilePage({userProfile}) {
 
               <div className={styles.profile__flex}>
 
-                <div style={{flex: "0.8"}}>
+                {/* user bio */}
+
+                <div style={{}}>
 
                   <div style={{display: "flex", width: "fit-content", alignItems: "center", gap: "1.2rem"}}>
                     <h2>{userProfile.userId.name}</h2>
@@ -125,6 +127,8 @@ export default function ViewProfilePage({userProfile}) {
 
                   </div>
 
+                    {/* user bio */}
+
                   <div>
 
                     <p>{userProfile.bio}</p>
@@ -132,8 +136,37 @@ export default function ViewProfilePage({userProfile}) {
                   </div>
 
                 </div>
+                
+                {/* user work experience */}
 
-                <div style={{flex: "0.2"}}>
+                <div className={styles.workHistory}>
+
+                  <h4>WORK HISTORY</h4>
+
+                  <div className={styles.workHistoryContainer}>
+
+                    {
+                      userProfile.pastWork.map((work, index) => {
+                        return (
+                          <div key={index} className={styles.workHistoryCard}>
+
+                            <p style={{fontWeight: "bold", display: "flex", alignItems: "center", gap: "0.8rem"}}>
+                              {work.company} - {work.position}
+                            </p>
+                            <p>{work.years}</p>
+
+                          </div>
+                        )
+                      })
+                    }
+
+                  </div>
+
+                </div>
+
+                {/* user post activity */}
+
+                <div style={{}}>
 
                   <h3>Recent Activity</h3>
 
@@ -163,34 +196,13 @@ export default function ViewProfilePage({userProfile}) {
 
                 </div>
 
-              </div>
-
-            </div>
-
-            <div className={styles.workHistory}>
-
-              <h4>WORK HISTORY</h4>
-
-              <div className={styles.workHistoryContainer}>
-
-                {
-                  userProfile.pastWork.map((work, index) => {
-                    return (
-                      <div key={index} className={styles.workHistoryCard}>
-
-                        <p style={{fontWeight: "bold", display: "flex", alignItems: "center", gap: "0.8rem"}}>
-                          {work.company} - {work.position}
-                        </p>
-                        <p>{work.years}</p>
-
-                      </div>
-                    )
-                  })
-                }
+                
 
               </div>
 
             </div>
+
+            
           </div>
         </DashboardLayout>
       </UserLayout>

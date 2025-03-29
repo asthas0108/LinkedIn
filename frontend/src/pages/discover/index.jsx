@@ -24,7 +24,7 @@ export default function DiscoverPage() {
     <UserLayout>
       <DashboardLayout>
         <div>
-          <h1>Discover profiles</h1>
+          <h2>Discover Profiles</h2>
 
           <div className={styles.allUserProfile}>
 
@@ -37,7 +37,7 @@ export default function DiscoverPage() {
                   <img className={styles.userCard_image} src={`${BASE_URL}/${user.userId.profilePicture}`} alt=''/>
 
                   <div>
-                      <h1>{user.userId.name}</h1>
+                      <h3>{user.userId.name}</h3>
                       <p>{user.userId.email}</p>
                   </div>
 

@@ -89,3 +89,25 @@
         padding-bottom: 8vh;
     }
 }
+
+.profileImage{
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+}
+
+.extraContainer__profile{
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-top: 10px;
+    cursor: pointer;
+    border: 1px solid black;
+    padding: 6px;
+    border-radius: 25px;
+    /* justify-content: center; */
+}
+.extraContainer__profile:hover{
+    scale: 1.05;
+    transition: ease-in;
+}

@@ -51,7 +51,7 @@ export default function Dashboard() {
           <DashboardLayout>
             <div className={styles.scrollComponent}>
 
-              <div className={styles.wrapper}>
+              <div className={styles.wrapper}> 
                   <div className={styles.createPostContainer}>
                     <img className={styles.userProfile} width={200} src={`${BASE_URL}/${authState.user.userId.profilePicture}`}/>
 
