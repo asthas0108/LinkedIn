@@ -31,7 +31,8 @@ export default function ProfilePage() {
     useEffect(() => {
         dispatch(getAboutUser({token: localStorage.getItem("token")}));
         dispatch(getAllPosts())
-    }, [])
+    }, []);
+
 
     useEffect(() => {
 
