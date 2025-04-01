@@ -86,7 +86,7 @@ export default function ViewProfilePage({userProfile}) {
         <DashboardLayout>
           <div className={styles.container}>
             <div className={styles.backDropContainer}>
-              <img className={styles.backDrop} src={`${BASE_URL}/${userProfile.userId.profilePicture}`}/>
+              <img className={styles.backDrop} src={`${BASE_URL}/uploads/${userProfile.userId.profilePicture}`}/>
             </div>
 
             <div className={styles.profileContainer_details}>
@@ -170,6 +170,30 @@ export default function ViewProfilePage({userProfile}) {
 
                   <h3>Recent Activity</h3>
 
+                  {/* {
+                    userPosts.map((post) => {
+                      // console.log(post);
+                      
+                      return (
+                        <div key={post._id} className={styles.postCard}>
+
+                          <div className={styles.card}>
+
+                            <div className={styles.card_profileContainer}>
+                              {
+                                post.media !== "" ? <img src={`${BASE_URL}/uploads/${post.media}`}/> : <div style={{width: "3.4rem", height:"3.4rem"}}></div>
+                              }
+                            </div>
+
+                            <p>{post.body}</p>
+
+                          </div>
+
+                        </div>
+                      )
+                    })
+                  } */}
+                  <div className={styles.cardContainer}>
                   {
                     userPosts.map((post) => {
                       // console.log(post);
@@ -181,7 +205,7 @@ export default function ViewProfilePage({userProfile}) {
 
                             <div className={styles.card_profileContainer}>
                               {
-                                post.media !== "" ? <img src={`${BASE_URL}/${post.media}`}/> : <div style={{width: "3.4rem", height:"3.4rem"}}></div>
+                                post.media !== "" ? <img src={`${BASE_URL}/uploads/${post.media}`}/> : <div style={{width: "3.4rem", height:"3.4rem"}}></div>
                               }
                             </div>
 
@@ -193,6 +217,7 @@ export default function ViewProfilePage({userProfile}) {
                       )
                     })
                   }
+                  </div>
 
                 </div>
 

@@ -43,6 +43,7 @@
 .homeContainer__extraContainer {
     border-left: 1px solid silver;
     padding-left: 1.2rem;
+    padding-right: 1.2rem;
 }
 
 .homeContainer__feedContainer {

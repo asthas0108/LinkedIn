@@ -98,7 +98,7 @@ export default function ProfilePage() {
                   updateProfilePicture(e.target.files[0])
               }} hidden type='file' id='uploadProfilePicture'/>
 
-              <img className={styles.backDrop} src={`${BASE_URL}/${userProfile.userId.profilePicture}`}/>
+              <img className={styles.backDrop} src={`${BASE_URL}/uploads/${userProfile.userId.profilePicture}`}/>
             </div>
 
             <div className={styles.profileContainer_details}>
@@ -190,7 +190,7 @@ export default function ProfilePage() {
 
                             <div className={styles.card_profileContainer}>
                               {
-                                post.media !== "" ? <img src={`${BASE_URL}/${post.media}`}/> : <div style={{width: "3.4rem", height:"3.4rem"}}></div>
+                                post.media !== "" ? <img src={`${BASE_URL}/uploads/${post.media}`}/> : <div style={{width: "3.4rem", height:"3.4rem"}}></div>
                               }
                             </div>
 

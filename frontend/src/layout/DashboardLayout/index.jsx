@@ -87,7 +87,7 @@ export default function DashboardLayout({children}) {
                                 router.push(`/view_profile/${profile.userId.username}`)
                             }}
                         >
-                            <img src={`${BASE_URL}/${profile.userId.profilePicture}`} alt={profile.userId.name} className={styles.profileImage} />
+                            <img src={`${BASE_URL}/uploads/${profile.userId.profilePicture}`} alt={profile.userId.name} className={styles.profileImage} />
                             <div>
                                 <p className={styles.profileName}>{profile.userId.name}</p>
                                 <p style={{color: "gray"}}>@{profile.userId.username}</p>
