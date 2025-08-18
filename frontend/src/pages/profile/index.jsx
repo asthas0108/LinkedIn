@@ -7,6 +7,7 @@ import styles from "./index.module.css";
 import { BASE_URL, clientServer } from '@/config';
 import { getAllPosts } from '@/config/redux/action/postAction';
 import { resetPostId } from '@/config/redux/reducer/postReducer';
+import { uploadImageToCloudinary } from '@/utils/uploadImage';
 
 export default function ProfilePage() {
 
@@ -48,20 +49,25 @@ export default function ProfilePage() {
         }
     }, [authState.user, postReducer.posts]);
 
+  
+
     const updateProfilePicture = async (file) => {
-      const formData = new FormData();
+  try {
+    // Upload to Cloudinary
+    const imageUrl = await uploadImageToCloudinary(file);
 
-      formData.append("profile_picture", file);
-      formData.append("token", localStorage.getItem("token"));
+    // Now send the URL to your backend to update the user profile
+    const response = await clientServer.post("/update_profile_picture", {
+      token: localStorage.getItem("token"),
+      profilePicture: imageUrl,
+    });
 
-      const response = await clientServer.post("/update_profile_picture", formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-
-      dispatch(getAboutUser({token: localStorage.getItem("token")}))
-    }
+    // Refresh user data
+    dispatch(getAboutUser({ token: localStorage.getItem("token") }));
+  } catch (error) {
+    console.error("Error uploading profile picture:", error);
+  }
+};
 
 
     const updateProfileData = async () => {
@@ -98,7 +104,7 @@ export default function ProfilePage() {
                   updateProfilePicture(e.target.files[0])
               }} hidden type='file' id='uploadProfilePicture'/>
 
-              <img className={styles.backDrop} src={`${BASE_URL}/uploads/${userProfile.userId.profilePicture}`}/>
+              <img className={styles.backDrop} src={userProfile.userId.profilePicture}/>
             </div>
 
             <div className={styles.profileContainer_details}>

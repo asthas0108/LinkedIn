@@ -53,7 +53,7 @@ export default function Dashboard() {
 
               <div className={styles.wrapper}> 
                   <div className={styles.createPostContainer}>
-                    <img className={styles.userProfile} width={200} src={`${BASE_URL}/uploads/${authState.user.userId.profilePicture}`}/>
+                    <img className={styles.userProfile} width={200} src={authState.user.userId.profilePicture}/>
 
                     <textarea onChange={(e) => setPostContent(e.target.value)} value={postContent} placeholder={"What's in your mind ?"} className={styles.textAreaOfContent} name='' id=''></textarea>
                     <label htmlFor='fileUpload'>
@@ -83,7 +83,7 @@ export default function Dashboard() {
 
                           <div className={styles.singleCard_profileContainer}>
 
-                            <img className={styles.userProfile} src={`${BASE_URL}/uploads/${post.userId.profilePicture}`}/>
+                            <img className={styles.userProfile} src={post.userId.profilePicture}/>
                             
                             <div>
                               
@@ -189,7 +189,7 @@ export default function Dashboard() {
                           return (
                             <div className={styles.singleComment} key={comment._id}>
                               <div className={styles.singleComment_profileContainer}>
-                                <img src={`${BASE_URL}/uploads/${comment.userId.profilePicture}`} alt=''/>
+                                <img src={comment.userId.profilePicture} alt=''/>
 
                                 <div>
                                   <p style={{fontWeight: "bold", fontSize: "1.2rem"}}>{comment.userId.name}</p>

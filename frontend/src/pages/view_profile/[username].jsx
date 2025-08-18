@@ -86,7 +86,7 @@ export default function ViewProfilePage({userProfile}) {
         <DashboardLayout>
           <div className={styles.container}>
             <div className={styles.backDropContainer}>
-              <img className={styles.backDrop} src={`${BASE_URL}/uploads/${userProfile.userId.profilePicture}`}/>
+              <img className={styles.backDrop} src={userProfile.userId.profilePicture}/>
             </div>
 
             <div className={styles.profileContainer_details}>

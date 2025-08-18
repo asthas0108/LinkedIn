@@ -100,25 +100,55 @@ export const login = async ( req, res ) => {
     }
 }
 
-export const uploadProfilePicture = async ( req, res ) => {
-    const { token } = req.body;
+// export const uploadProfilePicture = async ( req, res ) => {
+//     const { token } = req.body;
 
-    try{
-        const user = await User.findOne({ token: token });
+//     try{
+//         const user = await User.findOne({ token: token });
 
-        if(!user)
-            return res.status(404).json({ message: "user not found" });
+//         if(!user)
+//             return res.status(404).json({ message: "user not found" });
 
-        user.profilePicture = req.file.filename;
+//         user.profilePicture = req.file.filename;
 
-        await user.save();
+//         await user.save();
 
-        return res.json({ message: "profile picture updated" });
+//         return res.json({ message: "profile picture updated" });
 
-    }catch(err){
-        return res.status(500).json({ message: err.message });
+//     }catch(err){
+//         return res.status(500).json({ message: err.message });
+//     }
+// }
+
+export const uploadProfilePicture = async (req, res) => {
+  try {
+    const { token, profilePicture } = req.body; // Cloudinary URL sent from frontend
+
+    if (!token || !profilePicture) {
+      return res.status(400).json({ message: "token and profilePicture are required" });
     }
-}
+
+    const user = await User.findOne({ token });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Save Cloudinary URL instead of local filename
+    user.profilePicture = profilePicture;
+
+    await user.save();
+
+    return res.json({
+      message: "Profile picture updated successfully",
+      profilePicture: user.profilePicture,
+    });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
+
+
 
 export const updateUserProfile = async (req, res) => {
     try{

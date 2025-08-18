@@ -64,20 +64,6 @@ export default function DashboardLayout({children}) {
                     {children}
                 </div>
 
-                {/* <div className={styles.homeContainer__extraContainer}>
-                    <h3>Top Profiles</h3>
-
-                    {authState.all_profiles_fetched && authState.all_users.map((profile) => {
-
-                        return(
-                            <div key={profile._id} className={styles.extraContainer__profile}>
-                                <p>{profile.userId.name}</p>
-                            </div>
-                        )
-
-                    })}
-                </div> */}
-
                 <div className={styles.homeContainer__extraContainer}>
                     <h3>Top Profiles</h3>
                     {authState.all_profiles_fetched && authState.all_users.map((profile) => (
@@ -87,7 +73,7 @@ export default function DashboardLayout({children}) {
                                 router.push(`/view_profile/${profile.userId.username}`)
                             }}
                         >
-                            <img src={`${BASE_URL}/uploads/${profile.userId.profilePicture}`} alt={profile.userId.name} className={styles.profileImage} />
+                            <img src={profile.userId.profilePicture} alt={profile.userId.name} className={styles.profileImage} />
                             <div>
                                 <p className={styles.profileName}>{profile.userId.name}</p>
                                 <p style={{color: "gray"}}>@{profile.userId.username}</p>
