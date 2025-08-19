@@ -130,3 +130,24 @@
     height: 3.4rem;
     object-fit: cover;
 }
+
+.card_profileContainer {
+  width: 100%;
+  max-height: 400px; /* prevent too tall media */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* crop overflow gracefully */
+  border-radius: 12px; /* rounded corners */
+  background-color: #f5f5f5; /* light background for empty state */
+}
+
+.card_profileContainer img,
+.card_profileContainer video {
+  max-width: 100%;
+  max-height: 400px;
+  width: auto;
+  height: auto;
+  border-radius: 12px;
+  object-fit: contain; /* keep aspect ratio */
+}

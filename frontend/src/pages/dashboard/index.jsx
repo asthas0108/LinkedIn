@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from "./style.module.css";
 import { BASE_URL } from '@/config';
 import { resetPostId } from '@/config/redux/reducer/postReducer';
+import { uploadImageToCloudinary } from '@/utils/uploadImage';
 
 export default function Dashboard() {
 
@@ -24,12 +25,33 @@ export default function Dashboard() {
     const [commentText, setCommentText] = useState("")
 
     const handleUpload = async () => {
-      await dispatch(createPost({file: fileContent, body: postContent}));
+  try {
+    let mediaUrl = "";
+    let fileType = "";
 
-      setFileContent(null);
-      setPostContent("");
-      dispatch(getAllPosts());
+    if (fileContent) {
+      const uploaded = await uploadImageToCloudinary(fileContent);
+      mediaUrl = uploaded.url;
+      fileType = uploaded.fileType;
     }
+
+    await dispatch(
+      createPost({
+        body: postContent,
+        media: mediaUrl,
+        fileType,
+        token: localStorage.getItem("token"),
+      })
+    );
+
+    setFileContent(null);
+    setPostContent("");
+    dispatch(getAllPosts());
+  } catch (error) {
+    console.error("Error uploading post:", error.message);
+  }
+};
+
 
     useEffect(() => {
 
@@ -110,10 +132,18 @@ export default function Dashboard() {
 
                               <p style={{paddingTop: "1.3rem"}}>{post.body}</p>
 
-                              <div className={styles.singleCard_image}>
-                                {post.media !== "" ? <img src={`${BASE_URL}/uploads/${post.media}`}/> : <></>}
+                              <div className={styles.singleCard_media}>
+                                {post.media !== "" && (
+                                  post.fileType === "video" ? (
+                                    <video controls className={styles.media}>
+                                      <source src={post.media} type="video/mp4" />
+                                      Your browser does not support the video tag.
+                                    </video>
+                                  ) : (
+                                    <img src={post.media} alt="post media" className={styles.media} />
+                                  )
+                                )}
                               </div>
-
 
                               <div className={styles.optionsContainer}>
 

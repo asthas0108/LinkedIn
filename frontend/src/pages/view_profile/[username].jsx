@@ -1,8 +1,7 @@
 import { BASE_URL, clientServer } from '@/config';
 import DashboardLayout from '@/layout/DashboardLayout';
 import UserLayout from '@/layout/UserLayout';
-import { useSearchParams } from 'next/navigation'
-import React, { useEffect, useReducer, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from "./index.module.css";
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,12 +9,6 @@ import { getAllPosts } from '@/config/redux/action/postAction';
 import { getConnectionRequest, getMyConnectionRequests, sendConnectionRequest } from '@/config/redux/action/authAction';
 
 export default function ViewProfilePage({userProfile}) {
-
-    // const searchParams = useSearchParams()
-
-    // useEffect(() => {
-    //   console.log("view profile")
-    // });
 
     const router = useRouter();
     const postReducer = useSelector((state) => state.postReducer);
@@ -169,30 +162,6 @@ export default function ViewProfilePage({userProfile}) {
                 <div style={{}}>
 
                   <h3>Recent Activity</h3>
-
-                  {/* {
-                    userPosts.map((post) => {
-                      // console.log(post);
-                      
-                      return (
-                        <div key={post._id} className={styles.postCard}>
-
-                          <div className={styles.card}>
-
-                            <div className={styles.card_profileContainer}>
-                              {
-                                post.media !== "" ? <img src={`${BASE_URL}/uploads/${post.media}`}/> : <div style={{width: "3.4rem", height:"3.4rem"}}></div>
-                              }
-                            </div>
-
-                            <p>{post.body}</p>
-
-                          </div>
-
-                        </div>
-                      )
-                    })
-                  } */}
                   <div className={styles.cardContainer}>
                   {
                     userPosts.map((post) => {
@@ -204,10 +173,17 @@ export default function ViewProfilePage({userProfile}) {
                           <div className={styles.card}>
 
                             <div className={styles.card_profileContainer}>
-                              {
-                                post.media !== "" ? <img src={`${BASE_URL}/uploads/${post.media}`}/> : <div style={{width: "3.4rem", height:"3.4rem"}}></div>
-                              }
+                              {post.media !== "" ? (
+                                post.fileType === "video" ? (
+                                  <video src={post.media} controls />
+                                ) : (
+                                  <img src={post.media} alt="post media" />
+                                )
+                              ) : (
+                                <div style={{ width: "3.4rem", height: "3.4rem" }}></div>
+                              )}
                             </div>
+
 
                             <p>{post.body}</p>
 
