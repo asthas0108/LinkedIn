@@ -8,9 +8,10 @@
 }
 
 .profilePicture > img {
-    width: 6.5rem;
-
-    border-radius: 50%;
+    width: 6rem;
+    height: 6rem;   /* Ensures equal width & height */
+    border-radius: 50%; /* Makes it circular */
+    object-fit: cover;
 }
 
 .myConnections {
