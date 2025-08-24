@@ -214,6 +214,7 @@
 
 .card_profileContainer {
     display: flex;
+    flex-direction: column;
 }
 
 .card_profileContainer > img {

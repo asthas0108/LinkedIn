@@ -37,10 +37,6 @@
     gap: 1.2rem;
 }
 
-.card_profileContainer {
-    display: flex;
-}
-
 .card_profileContainer > img {
     width: 3.4rem;
     height: auto;
@@ -122,6 +118,7 @@
 
 .card_profileContainer {
     display: flex;
+    flex-direction: column;
 }
 
 .card_profileContainer > img {
