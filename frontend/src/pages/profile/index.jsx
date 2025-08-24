@@ -1,12 +1,10 @@
-import { getAboutUser } from '@/config/redux/action/authAction';
+import { getAboutUser, getUserPosts } from '@/config/redux/action/authAction';
 import DashboardLayout from '@/layout/DashboardLayout'
 import UserLayout from '@/layout/UserLayout'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from "./index.module.css";
-import { BASE_URL, clientServer } from '@/config';
-import { getAllPosts } from '@/config/redux/action/postAction';
-import { resetPostId } from '@/config/redux/reducer/postReducer';
+import { clientServer } from '@/config';
 import { uploadImageToCloudinary } from '@/utils/uploadImage';
 
 export default function ProfilePage() {
@@ -30,44 +28,41 @@ export default function ProfilePage() {
     }
 
     useEffect(() => {
-        dispatch(getAboutUser({token: localStorage.getItem("token")}));
-        dispatch(getAllPosts())
-    }, [])
+        dispatch(getAboutUser({ token: localStorage.getItem("token") }));
+    }, []);
 
     useEffect(() => {
+        if (authState.user !== undefined) {
+            setUserProfile(authState.user);
 
-        if(authState.user !== undefined) {
-            setUserProfile(authState.user)
-            let post = postReducer.posts.filter((post) => {
-  
-                return post.userId.username === authState.user.username
-        
-            })
-            
-    
-            setUserPosts(post);
+            // fetch only this user's posts
+            dispatch(getUserPosts({ userId: authState.user.userId._id, page: 1, limit: 10 }))
+                .unwrap()
+                .then((data) => {
+                    setUserPosts(data); 
+                })
+                .catch((err) => {
+                    console.error("Failed to fetch user posts", err);
+                });
         }
-    }, [authState.user, postReducer.posts]);
+    }, [authState.user, dispatch]);
 
-  
 
     const updateProfilePicture = async (file) => {
-  try {
-    // Upload to Cloudinary
-    const imageUrl = await uploadImageToCloudinary(file);
+      try {
+        const imageUrl = await uploadImageToCloudinary(file);
 
-    // Now send the URL to your backend to update the user profile
-    const response = await clientServer.post("/update_profile_picture", {
-      token: localStorage.getItem("token"),
-      profilePicture: imageUrl,
-    });
+        const response = await clientServer.post("/update_profile_picture", {
+          token: localStorage.getItem("token"),
+          profilePicture: imageUrl,
+        });
 
-    // Refresh user data
-    dispatch(getAboutUser({ token: localStorage.getItem("token") }));
-  } catch (error) {
-    console.error("Error uploading profile picture:", error);
-  }
-};
+        // Refresh user data
+        dispatch(getAboutUser({ token: localStorage.getItem("token") }));
+      } catch (error) {
+        console.error("Error uploading profile picture:", error);
+      }
+    };
 
 
     const updateProfileData = async () => {
@@ -186,8 +181,8 @@ export default function ProfilePage() {
 
                   <div className={styles.cardContainer}>
                   {
-                    userPosts.map((post) => {
-                      // console.log(post);
+                    userPosts.posts?.map((post) => {
+                      console.log(userPosts.posts);
                       
                       return (
                         <div key={post._id} className={styles.postCard}>
@@ -195,9 +190,16 @@ export default function ProfilePage() {
                           <div className={styles.card}>
 
                             <div className={styles.card_profileContainer}>
-                              {
-                                post.media !== "" ? <img src={`${BASE_URL}/uploads/${post.media}`}/> : <div style={{width: "3.4rem", height:"3.4rem"}}></div>
-                              }
+                              
+                              {post.media !== "" ? (
+                                post.fileType === "video" ? (
+                                  <video src={post.media} controls />
+                                ) : (
+                                  <img src={post.media} alt="post media" />
+                                )
+                              ) : (
+                                <div style={{ width: "3.4rem", height: "3.4rem" }}></div>
+                              )}
                             </div>
 
                             <p>{post.body}</p>

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { register, login, uploadProfilePicture, updateUserProfile, getUserAndProfile, updateProfileData, getAllUserProfile, downloadProfile, sendConnectionRequest, getMyConnectionsRequests, whatAreMyConnections, acceptConnectionRequest, getUserProfileAndUserBasedOnUsername } from "../controllers/user.controller.js";
+import { register, login, uploadProfilePicture, updateUserProfile, getUserAndProfile, updateProfileData, getAllUserProfile, downloadProfile, sendConnectionRequest, getMyConnectionsRequests, whatAreMyConnections, acceptConnectionRequest, getUserProfileAndUserBasedOnUsername, getUserPosts } from "../controllers/user.controller.js";
 
 
 const router = Router();
@@ -8,6 +8,7 @@ router.route('/update_profile_picture').post(uploadProfilePicture)
 
 router.route('/register').post(register);
 router.route('/login').post(login);
+router.route('/user/:userId/posts').get(getUserPosts);
 router.route('/user_update').post(updateUserProfile);
 router.route('/get_user_and_profile').get(getUserAndProfile);
 router.route('/update_profile_data').post(updateProfileData);

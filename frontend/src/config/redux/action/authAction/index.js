@@ -61,6 +61,22 @@ export const getAboutUser = createAsyncThunk (
     }
 )
 
+export const getUserPosts = createAsyncThunk(
+    "user/getUserPosts",
+    async ({ userId, page = 1, limit = 10 }, thunkAPI) => {
+        try {
+            const response = await clientServer.get(`/user/${userId}/posts`, {
+                params: { page, limit }
+            });
+
+            return thunkAPI.fulfillWithValue(response.data);
+        } catch (err) {
+            return thunkAPI.rejectWithValue(err.response?.data || { message: "Failed to fetch user posts" });
+        }
+    }
+);
+
+
 export const getAllUsers = createAsyncThunk(
     "user/getAllUsers",
     async (_, thunkAPI) => {

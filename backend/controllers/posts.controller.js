@@ -40,14 +40,42 @@ export const createPost = async (req, res) => {
 };
 
 
+// export const getAllPosts = async (req, res) => {
+//     try{
+//         const posts = await Post.find().populate('userId', 'name username email profilePicture');
+//         return res.json({posts});
+//     }catch(err){
+//         return res.status(500).json({message: err.message});
+//     }
+// }
+
+
 export const getAllPosts = async (req, res) => {
-    try{
-        const posts = await Post.find().populate('userId', 'name username email profilePicture');
-        return res.json({posts});
-    }catch(err){
-        return res.status(500).json({message: err.message});
+    try {
+        const { page = 1, limit = 10 } = req.query;
+        const skip = (page - 1) * limit;
+
+        const posts = await Post.find()
+            .sort({ createdAt: -1 })
+            .skip(skip)
+            .limit(Number(limit))
+            .populate('userId', 'name username email profilePicture');
+
+        const total = await Post.countDocuments();
+
+        return res.json({
+            posts,
+            pagination: {
+                total,
+                page: Number(page),
+                limit: Number(limit),
+                totalPages: Math.ceil(total / limit)
+            }
+        });
+    } catch (err) {
+        return res.status(500).json({ message: err.message });
     }
-}
+};
 
 
 export const deletePost = async (req, res) => {
@@ -105,25 +133,56 @@ export const commentPost = async (req, res) => {
     }
 }
 
+// export const get_comments_by_post = async (req, res) => {
+//     const {post_id} = req.query;
+
+//     try{
+//         const post = await Post.findOne({_id: post_id});
+//         if(!post){
+//             return res.status(404).json({message: "post not found"});
+//         }
+
+//         const comments = await Comment
+//         .find({postId: post_id})
+//         .populate("userId", "username name");
+
+//         return res.json(comments.reverse());
+
+//     }catch(err){
+//         return res.status(500).json({message: err.message});
+//     }
+// }
+
+
+// controllers/post.controller.js
 export const get_comments_by_post = async (req, res) => {
-    const {post_id} = req.query;
+    try {
+        const { post_id, page = 1, limit = 10 } = req.query;
+        const skip = (page - 1) * limit;
 
-    try{
-        const post = await Post.findOne({_id: post_id});
-        if(!post){
-            return res.status(404).json({message: "post not found"});
-        }
+        const comments = await Comment.find({ postId: post_id })
+            .sort({ createdAt: -1 })
+            .skip(skip)
+            .limit(Number(limit))
+            .populate("userId", "username name profilePicture");
 
-        const comments = await Comment
-        .find({postId: post_id})
-        .populate("userId", "username name");
+        const total = await Comment.countDocuments({ postId: post_id });
 
-        return res.json(comments.reverse());
-
-    }catch(err){
-        return res.status(500).json({message: err.message});
+        return res.json({
+            comments,
+            pagination: {
+                total,
+                page: Number(page),
+                limit: Number(limit),
+                totalPages: Math.ceil(total / limit)
+            }
+        });
+    } catch (err) {
+        return res.status(500).json({ message: err.message });
     }
-}
+};
+
+
 
 export const delete_comment_of_user = async (req, res) => {
     const {token, comment_id} = req.body;

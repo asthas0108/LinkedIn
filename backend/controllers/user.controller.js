@@ -1,5 +1,6 @@
 import User from "../models/user.model.js"
 import Profile from "../models/profile.model.js"
+import Post from "../models/posts.model.js";
 import ConnectionRequest from "../models/connections.model.js";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
@@ -99,6 +100,36 @@ export const login = async ( req, res ) => {
         return res.status(500).json({ message: err.message });
     }
 }
+
+// ✅ Controller: Get Posts by Specific User
+export const getUserPosts = async (req, res) => {
+    try {
+        const { userId } = req.params; // userId will come from route params (/users/:userId/posts)
+        const { page = 1, limit = 10 } = req.query;
+        const skip = (page - 1) * limit;
+
+        const posts = await Post.find({ userId })
+            .sort({ createdAt: -1 })
+            .skip(skip)
+            .limit(Number(limit))
+            .populate('userId', 'name username email profilePicture');
+
+        const total = await Post.countDocuments({ userId });
+
+        return res.json({
+            posts,
+            pagination: {
+                total,
+                page: Number(page),
+                limit: Number(limit),
+                totalPages: Math.ceil(total / limit)
+            }
+        });
+    } catch (err) {
+        return res.status(500).json({ message: err.message });
+    }
+};
+
 
 export const uploadProfilePicture = async (req, res) => {
   try {

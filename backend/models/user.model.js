@@ -38,5 +38,10 @@ const UserSchema = new mongoose.Schema({
 });
 
 
+UserSchema.index({ email: 1 }, { unique: true });
+UserSchema.index({ username: 1 }, { unique: true });
+UserSchema.index({ createdAt: -1 });
+
+
 const User = mongoose.model("User", UserSchema);
 export default User;
