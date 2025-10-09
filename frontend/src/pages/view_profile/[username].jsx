@@ -90,12 +90,12 @@ export default function ViewProfilePage({userProfile}) {
 
                 <div style={{}}>
 
-                  <div style={{display: "flex", width: "fit-content", alignItems: "center", gap: "1.2rem"}}>
+                  <div style={{display: "flex", width: "fit-content", alignItems: "center", gap: "1.2rem", marginBottom: "0.9rem"}}>
                     <h2>{userProfile.userId.name}</h2>
                     <p style={{color: "gray"}}>@{userProfile.userId.username}</p>
                   </div>
 
-                  <div style={{display: "flex", alignItems: "center", gap: "1.2rem"}}>
+                  <div style={{display: "flex", alignItems: "center", gap: "1.2rem", marginBottom: "0.9rem"}}>
 
                     {
                       isCurrentUserInConnection ?
@@ -122,19 +122,18 @@ export default function ViewProfilePage({userProfile}) {
 
                     {/* user bio */}
 
-                  <div>
+                  <div className={styles.bio}>
+  <p>{userProfile.bio}</p>
+</div>
 
-                    <p>{userProfile.bio}</p>
-
-                  </div>
 
                 </div>
                 
                 {/* user work experience */}
 
-                <div className={styles.workHistory}>
+                <div className={{marginTop: "2.5rem", width: "100%"}}>
 
-                  <h4>WORK HISTORY</h4>
+                  <h3>Work History</h3>
 
                   <div className={styles.workHistoryContainer}>
 
@@ -146,7 +145,7 @@ export default function ViewProfilePage({userProfile}) {
                             <p style={{fontWeight: "bold", display: "flex", alignItems: "center", gap: "0.8rem"}}>
                               {work.company} - {work.position}
                             </p>
-                            <p>{work.years}</p>
+                            <p>{work.years} years</p>
 
                           </div>
                         )
@@ -159,7 +158,7 @@ export default function ViewProfilePage({userProfile}) {
 
                 {/* user post activity */}
 
-                <div style={{}}>
+                <div style={{marginTop: "2.4rem", width: "100%"}}>
 
                   <h3>Recent Activity</h3>
                   <div className={styles.cardContainer}>

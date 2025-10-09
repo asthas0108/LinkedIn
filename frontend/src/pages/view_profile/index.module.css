@@ -103,12 +103,9 @@
 }
 
 .card {
-    /* display: grid;
-    grid-template-rows: 3;
-    align-items: center;
-    gap: 1.2rem; */
-    display: flex; /* Stack image and text */
-    align-items: center; /* Center items */
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
     padding: 1rem;
     gap: 1rem;
     border: 1px solid #ddd;
@@ -147,4 +144,16 @@
   height: auto;
   border-radius: 12px;
   object-fit: contain; /* keep aspect ratio */
+}
+
+.bio {
+  font-size: 1rem;              /* readable text */
+  line-height: 1.6;             /* spacing between lines */
+  color: #475569;               /* slate-600, softer than black */
+  background: #f8fafc;          /* light subtle background */
+  padding: 1rem 1.2rem;
+  border-radius: 12px;          /* rounded corners */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05); /* soft shadow */
+  margin-top: 1rem;
+  white-space: pre-line;        /* keeps line breaks if bio has them */
 }

@@ -6,26 +6,34 @@
 
 .createPostContainer {
     display: flex;
-    height: 10svh;
+    align-items: flex-start;
     width: 100%;
-    padding-inline: 0.8rem;
-    gap: 1.3rem;
-    align-items: center;
-    background: rgb(254, 232, 232);
-    border-radius: 20px;
+    padding: 1.2rem;
+    gap: 1rem;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(10,102,194,0.09);
+    border: 1.2px solid #e1e9ee;
     position: relative;
 }
 
 .uploadButton {
     position: absolute;
-    right: 0;
-    bottom: -30%;
-    background: rgb(0, 0, 10);
+    right: 1.5rem;
+    bottom: 1.2rem;
+    background: #0a66c2;
     color: white;
-    border-radius: 10px;
-    padding-inline: 1.2rem;
-    padding-block: 0.8rem;
+    border-radius: 8px;
+    padding: 0.7rem 1.3rem;
     cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0px 2px 10px rgba(10,102,194,0.08);
+    border: none;
+    outline: none;
+    transition: background 0.18s;
+}
+.uploadButton:hover {
+    background: #004182;
 }
 
 .userProfile {
@@ -53,19 +61,29 @@
 }
 
 .textAreaOfContent {
-    width: 80%;
-    height: 70%;
-    border: 1px solid silver;
-    border-radius: 10px;
-    font-family: Arial, Helvetica, sans-serif;
-    padding-inline: 1.5rem;
-    padding-block: 0.8rem;
+    width: 85%;
+    border: 1.5px solid #e1e9ee;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 0.8rem 1.2rem;
     outline: none;
+    resize: none;
+    min-height: 48px;
+    margin-right: 1rem;
+    background: #f3f6f8;
+    color: #222;
+    box-shadow: 0 2px 8px rgba(10,102,194,0.04);
 }
 
-.singleCard {
+ .singleCard {
     width: 100%;
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(10,102,194,0.09);
+    border: 1.3px solid #e1e9ee;
+    margin-bottom: 1.5rem;
+    transition: box-shadow 0.12s;
 }
 
 .wrapper {
@@ -84,8 +102,11 @@
 }
 
 .singleCard_profileContainer > img {
-    width: 10%;
     border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    object-fit: cover;
+    margin-right: 0.6rem;
 }
 
 .singleCard_image {
@@ -149,8 +170,8 @@
     height: 100vh;
     top: 0;
     left: 0;
-    z-index: 2;
-    background: rgb(0, 0, 0, 0.7);
+    z-index: 100;
+    background: rgba(0,0,0,0.7);
     overflow: hidden;
     justify-content: center;
     display: flex;
@@ -158,54 +179,69 @@
 }
 
 .allCommentsContainer {
-    /* width: 40vw; */
-    min-width: 40svw;
+    min-width: 40vw;
     height: 80vh;
-    max-width: 1120px;
-    background-color: white;
+    max-width: 540px;
+    background-color: #fff;
     border-radius: 10px;
     position: relative;
-    padding: 1.4rem;
+    padding: 1.5rem;
+    box-shadow: 0 3px 16px rgba(10,102,194,0.16);
 }
-
 .postCommentContainer {
     position: absolute;
-    bottom: 1.2rem;
-    left: 1.2rem;
-    width: 90%;
+    bottom: 1.15rem;
+    left: 1rem;
+    width: 92%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 1.2rem;
+    gap: 1rem;
 }
-
-.postCommentContainer > input { 
+.postCommentContainer > input {
     flex: 0.9;
-    padding-inline: 1.5rem;
-    padding-block: 1.2rem;
+    padding-inline: 1rem;
+    padding-block: 0.8rem;
     border: none;
     outline: none;
-    background-color: rgb(228, 228, 228);
-    border-radius: 10px;
+    background-color: #f3f6f8;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
 }
-
 .postCommentContainer > input:focus {
-    border: 1px solid silver;
+    border: 1px solid #0a66c2;
 }
-
-.postCommentContainer__commentBtn { 
+.postCommentContainer__commentBtn {
     flex: 0.1;
-    width: fit-content;
-    padding: 1.2rem;
-    background: orange;
-    border-radius: 10px;
+    padding: 0.8rem 1.4rem;
+    background: #0a66c2;
+    border-radius: 8px;
     text-align: center;
     color: white;
+    font-weight: 700;
     cursor: pointer;
+    transition: background 0.16s;
+    border: none;
+    outline: none;
+}
+.postCommentContainer__commentBtn:hover {
+    background: #004182;
 }
 
 @media screen and (max-width: 600px) {
     .allCommentsContainer {
         width: 90%;
     }
+}
+
+.post_body {
+  font-size: 1rem;              /* readable text */
+  line-height: 1.6;             /* spacing between lines */
+  color: #2a323d;               /* slate-600, softer than black */
+  background: #f8fafc;          /* light subtle background */
+  padding: 1rem 1.2rem;
+  border-radius: 12px;          /* rounded corners */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05); /* soft shadow */
+  margin-top: 1rem;
+  white-space: pre-line;        /* keeps line breaks if bio has them */
 }

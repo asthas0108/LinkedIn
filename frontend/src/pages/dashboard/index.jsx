@@ -75,7 +75,7 @@ export default function Dashboard() {
 
               <div className={styles.wrapper}> 
                   <div className={styles.createPostContainer}>
-                    <img className={styles.userProfile} width={200} src={authState.user.userId.profilePicture}/>
+                    <img className={styles.userProfile} width={200} src={authState.user?.profile?.userId?.profilePicture}/>
 
                     <textarea onChange={(e) => setPostContent(e.target.value)} value={postContent} placeholder={"What's in your mind ?"} className={styles.textAreaOfContent} name='' id=''></textarea>
                     <label htmlFor='fileUpload'>
@@ -105,15 +105,15 @@ export default function Dashboard() {
 
                           <div className={styles.singleCard_profileContainer}>
 
-                            <img className={styles.userProfile} src={post.userId.profilePicture}/>
+                            <img className={styles.userProfile} src={post.author?.profilePicture}/>
                             
                             <div>
                               
                               <div style={{display: "flex", gap: "1.2rem", justifyContent: "space-between"}}>
-                                <p style={{fontWeight: "bold"}}>{post.userId.name}</p>
+                                <p style={{fontWeight: "bold"}}>{post.author?.name}</p>
 
                                 {
-                                  post.userId._id === authState.user.userId._id &&
+                                  post.userId?._id === authState.user.userId?._id &&
                                   <div onClick={async () => {
                                      await dispatch(deletePost({post_id: post._id}))
                                      await dispatch(getAllPosts())
@@ -128,9 +128,9 @@ export default function Dashboard() {
 
                               </div>
 
-                              <p style={{color: "gray"}}>@{post.userId.username}</p>
+                              <p style={{color: "gray"}}>@{post.author?.username}</p>
 
-                              <p style={{paddingTop: "1.3rem"}}>{post.body}</p>
+                              <p className={styles.post_body} style={{paddingTop: "1.3rem"}}>{post.body}</p>
 
                               <div className={styles.singleCard_media}>
                                 {post.media !== "" && (
@@ -219,11 +219,11 @@ export default function Dashboard() {
                           return (
                             <div className={styles.singleComment} key={comment._id}>
                               <div className={styles.singleComment_profileContainer}>
-                                <img src={comment.userId.profilePicture} alt=''/>
+                                <img src={comment.userId?.profilePicture} alt='' style={{width: "40px", height: "40px", borderRadius: "50%"}}/>
 
                                 <div>
-                                  <p style={{fontWeight: "bold", fontSize: "1.2rem"}}>{comment.userId.name}</p>
-                                  <p>@{comment.userId.username}</p>
+                                  <p style={{fontWeight: "bold", fontSize: "1.2rem"}}>{comment.userId?.name}</p>
+                                  <p>@{comment.userId?.username}</p>
                                 </div>
                               </div>
 

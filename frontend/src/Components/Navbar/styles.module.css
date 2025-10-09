@@ -1,8 +1,9 @@
 .container {
-    padding: 1.2rem;
-    background-color: rgb(2, 2, 2);
-    color: white;
-    margin-bottom: 30px;
+    background: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #e1e9ee;
 }
 
 .navBar {
@@ -11,17 +12,102 @@
     justify-content: space-between;
 }
 
-.navBarOptionContainer {
+.brand {
     display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 0.8rem;
 }
 
-.buttonJoin {
-    background-color: rgb(243, 94, 179);
-    border-radius: 10px;
-    padding-block: 0.6rem;
-    padding-inline: 1.2rem;
-    color: white;
-    font-size: 0.7rem;
-    font-weight: bold;
+.logo {
+    height: 2rem;
+    width: 2rem;
+}
+
+.title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #0a66c2; /* LinkedIn blue */
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 0.02em;
+}
+
+.options {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.profileSection {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.greeting {
+    font-size: 1rem;
+    color: #333333;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.profileBtn, .logoutBtn, .joinBtn {
+    padding: 0.4rem 1rem;
+    border-radius: 3px;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 600;
     cursor: pointer;
+    transition: background-color 0.2s ease;
+    outline: none;
+}
+
+.profileBtn {
+    background-color: transparent;
+    color: #0a66c2;
+    border: 1.5px solid #0a66c2;
+}
+
+.profileBtn:hover {
+    background-color: #e1f0ff;
+}
+
+.logoutBtn {
+    background-color: #efefef;
+    color: #404040;
+}
+
+.logoutBtn:hover {
+    background-color: #d6d6d6;
+}
+
+.joinBtn {
+    background-color: #0a66c2;
+    color: white;
+    font-weight: 700;
+    border: none;
+}
+
+.joinBtn:hover {
+    background-color: #004182;
+}
+
+@media (max-width: 700px) {
+    .container {
+        padding: 0.75rem 1rem;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #e1e9ee;
+    }
+    .brand .title {
+        font-size: 1.2rem;
+    }
+    .profileSection .greeting {
+        display: none;
+    }
+    .options {
+        gap: 0.7rem;
+    }
+    .profileBtn, .logoutBtn, .joinBtn {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.85rem;
+    }
 }

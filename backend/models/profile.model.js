@@ -1,59 +1,24 @@
 import mongoose from "mongoose";
 
 const educationSchema = new mongoose.Schema({
-    school: {
-        type: String,
-        default: '',
-    },
-    degree: {
-        type: String,
-        default: '',
-    },
-    fieldOfStudy: {
-        type: String,
-        default: '',
-    },
-});
-
+    school: String,
+    degree: String,
+    fieldOfStudy: String,
+}, { _id: false });
 
 const workSchema = new mongoose.Schema({
-    company: {
-        type: String,
-        default: '',
-    },
-    position: {
-        type: String,
-        default: '',
-    },
-    years: {
-        type: String,
-        default: '',
-    },
-});
-
+    company: String,
+    position: String,
+    years: String,
+}, { _id: false });
 
 const ProfileSchema = new mongoose.Schema({
-    userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-    },
-    bio: {
-        type: String,
-        default: '',
-    },
-    currentPost: {
-        type: String,
-        default: '',
-    },
-    pastWork: {
-        type: [workSchema],
-        default: [],
-    },
-    education: {
-        type: [educationSchema],
-        default: [],
-    },
-})
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    bio: { type: String, default: '' },
+    currentPost: { type: String, default: '' },
+    pastWork: { type: [workSchema], default: [] },
+    education: { type: [educationSchema], default: [] }
+}, { timestamps: true });
 
 ProfileSchema.index({ userId: 1 });
 
