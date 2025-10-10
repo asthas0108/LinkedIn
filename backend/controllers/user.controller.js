@@ -8,9 +8,6 @@ import crypto from "crypto";
 import PDFDocument from "pdfkit";
 import fs from "fs";
 
-/* ================================================================
-   🔹 Utility Function: Convert Profile to PDF
-   ================================================================= */
 const convertUserDataTOPDF = async (userData) => {
   const doc = new PDFDocument();
 
@@ -49,9 +46,6 @@ const convertUserDataTOPDF = async (userData) => {
   return outputPath;
 };
 
-/* ================================================================
-   🔹 Register
-   ================================================================= */
 export const register = async (req, res) => {
   try {
     const { name, email, password, username } = req.body;
@@ -85,9 +79,6 @@ export const register = async (req, res) => {
   }
 };
 
-/* ================================================================
-   🔹 Login
-   ================================================================= */
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -113,9 +104,6 @@ export const login = async (req, res) => {
   }
 };
 
-/* ================================================================
-   🔹 Get User Posts with Pagination
-   ================================================================= */
 export const getUserPosts = async (req, res) => {
   try {
     const { userId } = req.params;
@@ -145,9 +133,6 @@ export const getUserPosts = async (req, res) => {
   }
 };
 
-/* ================================================================
-   🔹 Upload Profile Picture
-   ================================================================= */
 export const uploadProfilePicture = async (req, res) => {
   try {
     const { token, profilePicture } = req.body;
@@ -174,9 +159,6 @@ export const uploadProfilePicture = async (req, res) => {
   }
 };
 
-/* ================================================================
-   🔹 Update User Profile (User collection fields)
-   ================================================================= */
 export const updateUserProfile = async (req, res) => {
   try {
     const { token, ...newUserData } = req.body;
@@ -203,27 +185,6 @@ export const updateUserProfile = async (req, res) => {
   }
 };
 
-/* ================================================================
-   🔹 Get Logged-in User + Profile
-   ================================================================= */
-// export const getUserAndProfile = async (req, res) => {
-//   try {
-//     const { token } = req.query;
-
-//     const user = await User.findOne({ token });
-//     if (!user) return res.status(404).json({ message: "User not found" });
-
-//     const userProfile = await Profile.findOne({ userId: user._id }).populate(
-//       "userId",
-//       "name email username profilePicture"
-//     );
-
-//     return res.json({ profile: userProfile });
-//   } catch (err) {
-//     return res.status(500).json({ message: err.message });
-//   }
-// };
-
 export const getUserAndProfile = async (req, res) => {
   try {
     const authHeader = req.headers.authorization;
@@ -247,11 +208,6 @@ export const getUserAndProfile = async (req, res) => {
   }
 };
 
-
-
-/* ================================================================
-   🔹 Update Profile Data (Profile collection fields)
-   ================================================================= */
 export const updateProfileData = async (req, res) => {
   try {
     const { token, ...newProfileData } = req.body;
@@ -269,9 +225,6 @@ export const updateProfileData = async (req, res) => {
   }
 };
 
-/* ================================================================
-   🔹 Get All Profiles (For discovery / feed)
-   ================================================================= */
 export const getAllUserProfile = async (req, res) => {
   try {
     const profiles = await Profile.find().populate(
@@ -284,9 +237,6 @@ export const getAllUserProfile = async (req, res) => {
   }
 };
 
-/* ================================================================
-   🔹 Download Profile as PDF
-   ================================================================= */
 export const downloadProfile = async (req, res) => {
   try {
     const user_id = req.query.id;
@@ -305,12 +255,15 @@ export const downloadProfile = async (req, res) => {
     return res.status(500).json({ message: err.message });
   }
 };
-
-/* ================================================================
-   🔹 Connection Requests
-   ================================================================= */
+ 
 export const sendConnectionRequest = async (req, res) => {
-  const { token, connectionId } = req.body;
+  const { connectionId } = req.body;
+  const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res.status(401).json({ message: "No token provided" });
+    }
+
+    const token = authHeader.split(" ")[1];
 
   try {
     const user = await User.findOne({ token });
@@ -345,7 +298,12 @@ export const sendConnectionRequest = async (req, res) => {
 };
 
 export const getMyConnectionsRequests = async (req, res) => {
-  const { token } = req.query;
+  const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res.status(401).json({ message: "No token provided" });
+    }
+
+    const token = authHeader.split(" ")[1];
 
   try {
     const user = await User.findOne({ token });
@@ -362,7 +320,12 @@ export const getMyConnectionsRequests = async (req, res) => {
 };
 
 export const whatAreMyConnections = async (req, res) => {
-  const { token } = req.query;
+  const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res.status(401).json({ message: "No token provided" });
+    }
+
+    const token = authHeader.split(" ")[1];
 
   try {
     const user = await User.findOne({ token });
@@ -401,9 +364,6 @@ export const acceptConnectionRequest = async (req, res) => {
   }
 };
 
-/* ================================================================
-   🔹 Get Profile by Username
-   ================================================================= */
 export const getUserProfileAndUserBasedOnUsername = async (req, res) => {
   const { username } = req.query;
   try {
