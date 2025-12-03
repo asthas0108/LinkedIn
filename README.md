@@ -42,6 +42,7 @@ Connectify is a professional networking platform inspired by LinkedIn. It allows
 
 ## 📂 Folder Structure
 
+```
 LinkedIn/
 ├── .gitignore
 ├── backend/
@@ -128,7 +129,7 @@ LinkedIn/
         │   └── Home.module.css
         └── utils/
             └── uploadImage.js
-
+```
 
 ---
 
