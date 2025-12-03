@@ -133,6 +133,46 @@ LinkedIn/
 
 ---
 
+# 📌 API Endpoints
+
+---
+
+# 👤 User Routes
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/update_profile_picture` | Upload profile picture |
+| POST | `/register` | Register new user |
+| POST | `/login` | Login user |
+| GET | `/user/:userId/posts` | Get posts of a specific user |
+| POST | `/user_update` | Update user profile picture or info |
+| GET | `/get_user_and_profile` | Fetch user + profile details |
+| POST | `/update_profile_data` | Update profile data (bio, skills, etc.) |
+| GET | `/user/get_all_users` | Get all user profiles |
+| GET | `/user/download_resume` | Download user resume PDF |
+| POST | `/user/send_connection_request` | Send connection request |
+| GET | `/user/getConnectionRequests` | Get connection requests received |
+| GET | `/user/user_connection_request` | Get accepted connections |
+| POST | `/user/accept_connection_request` | Accept connection request |
+| GET | `/user/get_profile_based_on_username` | Fetch profile using username |
+
+---
+
+# 📝 Post Routes
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/` | Active API check |
+| POST | `/post` | Create a new post (text + image) |
+| GET | `/posts` | Get all posts (Home feed) |
+| DELETE | `/delete_post` | Delete a post |
+| POST | `/comment` | Add comment on a post |
+| GET | `/get_comments` | Get all comments for a post |
+| DELETE | `/delete_comment` | Delete a specific comment |
+| POST | `/increment_post_like` | Like/Unlike a post |
+
+---
+
 ## ✨ Future Enhancements
 
 - ✅ Notifications system
