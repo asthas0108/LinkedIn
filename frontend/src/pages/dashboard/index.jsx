@@ -75,7 +75,7 @@ export default function Dashboard() {
 
               <div className={styles.wrapper}> 
                   <div className={styles.createPostContainer}>
-                    <img className={styles.userProfile} width={200} src={authState.user?.profile?.userId?.profilePicture}/>
+                    <img className={styles.userProfile} width={200} src={authState.user?.userId?.profilePicture}/>
 
                     <textarea onChange={(e) => setPostContent(e.target.value)} value={postContent} placeholder={"What's in your mind ?"} className={styles.textAreaOfContent} name='' id=''></textarea>
                     <label htmlFor='fileUpload'>
