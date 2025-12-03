@@ -43,7 +43,8 @@ export default function MyConnectionsPage() {
           }
 
           {
-            authState.connectionRequest.length !== 0 && authState.connectionRequest.filter((connection) => connection.status_accepted === null).map((user, index) => {
+            authState.connectionRequest.length !== 0 && authState.connectionRequest.filter((connection) => connection.status_accepted === null || connection.status_accepted === undefined
+).map((user, index) => {
               return (
                 <div onClick={() => {
                   router.push(`/view_profile/${user.userId.username}`)
@@ -80,7 +81,7 @@ export default function MyConnectionsPage() {
           <h4>My Network</h4>
 
           {
-            authState.connectionRequest.filter((connection) => connection.status_accepted !== null).map((user, index) => {
+            authState.connectionRequest.filter((connection) => connection.status_accepted === true).map((user, index) => {
               return (
                 <div onClick={() => {
                   router.push(`/view_profile/${user.userId.username}`)

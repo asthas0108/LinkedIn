@@ -333,20 +333,29 @@ export const whatAreMyConnections = async (req, res) => {
 
     const connections = await ConnectionRequest.find({
       connectionId: user._id,
-      status_accepted: true, // ✅ Only accepted connections
+      status_accepted: null, // ✅ Only accepted connections
     })
       .populate("userId", "name username email profilePicture")
       .sort({ createdAt: -1 });
 
-    return res.json(connections);
+    return res.json({connections});
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
 };
 
 export const acceptConnectionRequest = async (req, res) => {
-  const { token, requestId, action_type } = req.body;
+  const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res.status(401).json({ message: "No token provided" });
+    }
 
+    const token = authHeader.split(" ")[1];
+  const { requestId, action_type } = req.body;
+
+  if (!requestId || !action_type) {
+    return res.status(400).json({ message: "Request ID and action type are required" });
+  }
   try {
     const user = await User.findOne({ token });
     if (!user) return res.status(404).json({ message: "User not found" });

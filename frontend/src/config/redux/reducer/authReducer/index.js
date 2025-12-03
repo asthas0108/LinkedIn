@@ -103,7 +103,7 @@ const authSlice = createSlice({
 
       // 🔹 My requests
       .addCase(getMyConnectionRequests.fulfilled, (state, action) => {
-        state.connectionRequest = action.payload;
+        state.connectionRequest = action.payload.connections;
       })
       .addCase(getMyConnectionRequests.rejected, (state, action) => {
         state.message = action.payload || { message: "Failed to fetch requests" };
