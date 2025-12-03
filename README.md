@@ -133,9 +133,7 @@ LinkedIn/
 
 ---
 
-# 📌 API Endpoints
-
----
+## 📌 API Endpoints
 
 # 👤 User Routes
 
@@ -156,7 +154,6 @@ LinkedIn/
 | POST | `/user/accept_connection_request` | Accept connection request |
 | GET | `/user/get_profile_based_on_username` | Fetch profile using username |
 
----
 
 # 📝 Post Routes
 
